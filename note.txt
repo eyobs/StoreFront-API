@@ -1,0 +1,118 @@
+django-debug-toolbar
+pipenv install django-debug-toolbar
+
+pipenv shell
+
+python manage.py startapp store
+python manage.py startapp tags
+python manage.py startapp likes
+
+
+=> django field types
+    -> field options eg choices
+N.B Django will create a primary key for us
+
+python manage.py makemigrations
+python manage.py migrate
+command platte: sqlite open database
+
+=> to see the actual sql statement executed by a migration use:
+python manage.py sqlmigrate store 0003
+
+=> to revert our DB to the last migration (003)
+python manage.py migrate store 0003
+
+
+=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+https://wiki.archlinux.org/title/PostgreSQL
+note
+
+sudo pacman -S postgresql
+
+sudo systemctl start postgresql
+
+sudo -iu postgres
+
+initdb -D /var/lib/postgres/data
+or 
+=> initdb --locale=en_US.UTF-8 -E UTF8 -D /var/lib/postgres/data
+
+=> Success. You can now start the database server using:
+    pg_ctl -D /var/lib/postgres/data -l logfile start
+
+createuser --interactive
+createdb storefront
+
+pipenv install psycopg2
+
+"sqltools.connections": [
+      {
+        "name": "PostgreSQL database",
+        "driver": "PostgreSQL",
+        "previewLimit": 50,
+        "server": "db",
+        "port": 5432,
+        "database": "storefront",
+        "username": "admin",
+        "password": "admin"
+      }
+],
+
+=> USE pgadmin4 python package in a virtual environment to manage postgres
+source bin/activate
+pgadmin4
+-> then visit http://127.0.0.1:5050/browser/
+
+
+Django ORM
+-> Object Relational Mapper
+
+"Premature optimization is the root of all evils." Donald Knuth
+
+=> Django admin site
+python manage.py createsuperuser
+python manage.py changepassword admin 
+  -> to change the password
+
+Data MOdel and AdMin interface done!!
+===========================================================================================
+
+PART 2
+create database storefront2 and config
+pipenv install
+pipenv install psycopg2
+pipenv shell
+python manage.py migrate
+-> Then populate z DB with the seed data
+python manage.py createsuperuser
+
+pipenv install djangorestframework
+
+=> vscode semantic colorization with Pylance,
+  ->open command pallate and search for the theams scope in developer MOde 
+  -> the ajust the scope and settings accourdingly
+
+https://stackoverflow.com/questions/19135161/django-db-utils-integrityerror-duplicate-key-value-violates-unique-constraint
+=>primary key sequence has gone out of sync
+python manage.py dbshell
+select max(id) from store_product;
+alter sequence store_product_id_seq restart with 1001;
+
+=> Nested routes
+pipenv install drf-nested-routers
+
+=>Generic Filtering
+pipenv install django-filter
+
+
+=> when changing the User model to Abstractuser model we will have to drop and recreate the DB
+DROP DATABASE storefront2;
+CREATE DATABASE storefront2;
+
+=> Token based authentication
+
+-> djoser 
+pipenv install djoser
+
+pipenv install djangorestframework_simplejwt
