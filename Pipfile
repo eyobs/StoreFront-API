@@ -12,6 +12,9 @@ drf-nested-routers = "*"
 django-filter = "*"
 djoser = "*"
 djangorestframework-simplejwt = "*"
+psycopg2 = "*"
+pillow = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 autopep8 = "*"

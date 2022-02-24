@@ -116,3 +116,48 @@ CREATE DATABASE storefront2;
 pipenv install djoser
 
 pipenv install djangorestframework_simplejwt
+
+
+===========================================================================================
+
+PART 3
+CREATE DATABASE storefront3;
+
+ex@ex.com
+123456
+
+pipenv install
+pipenv install psycopg2
+
+python manage.py migrate
+
+python manage.py seed_db
+
+=> django.db.utils.ProgrammingError: cannot cast type bigint to uuid
+  ->"simpliest" solution for this issue if you wanna use uuid field as "ID" you need to start 
+    with this field as id befroe the first migration the cast missing part is because you id field 
+    dont make the change the propper way to an uuidField
+
+python manage.py createsuperuser
+admin
+ex@ex.com
+admin
+
+python manage.py runserver
+
+-> because we have an image field we need pillow
+pipenv install pillow
+python manage.py makemigrations
+
+=> Client app
+CORS (cross origion resource sharing)
+
+from 8001 client -> to 8000 server
+  -> chrome sees those as different domains
+  -> to solve this problem use:
+    => django-cors-headers
+
+pipenv install django-cors-headers
+
+==> the django-cors-headers sends "Access-Control-Allow-Origion: http//localhost:8001"
+  -> this is sent to the browser so that it allows the upload
