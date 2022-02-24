@@ -214,4 +214,41 @@ pipenv install flower
 celery -A storefront flower
 http://localhost:5555/
 
+=> Automated Testing
+-> test behaviour not implementaton
+-> TEST FRAMEWORKS
+  * unittest (builtin)
+  * pytest
+    -more features
+    -Tons of plugins
+    -less boilerplate
 
+pipenv install --dev pytest
+pipenv install --dev pytest-django
+
+-> every test should have three steps 
+  AAA (Arrange, Act, Assert)
+pytest
+pytest /store/tests/test_collections.py::TestCreateCollection::test ...
+pytest -k anonymous
+
+-> To skip a test use this decorator
+  @pytest.mark.skip
+
+-> Continuous Testing
+pipenv install --dev pytest-watch
+ptw
+
+-> Run and Debug Tests in VSCode
+-> Tests should have a single responsibility and might have multiple assertions
+   as long as they are logically related.
+
+-> pytest fixtures
+-> python closure function
+pipenv install --dev model_bakery
+-> pytest creates a temporary database prefixed with test_ and drops it when the test is complete
+   *test_storefront3
+  
+-> Exercise
+  * write all the tests for the collections endpoint and the products endpoint
+  
