@@ -168,6 +168,7 @@ pipenv install django-cors-headers
 -> to send emails we need SMTP (Simple Mail Transfer Protocol)
 -> we need a fake SMTP server for dev
   like smtp4dev
+docker run --rm -it -p 3000:80 -p 2525:25 rnwood/smtp4dev
 
 -> Django Email Backends
   * SMTP (default)
@@ -181,5 +182,36 @@ pipenv install django-cors-headers
 
 pipenv install django-templated-mail
 
+
+==> Running Background Tasks
+  -> Long running Tasks
+    * Proccessing images and videos
+    * Generating reports
+    * Sending emails
+    * Running machine learning models
+    
+  -> using celery
+  https://docs.celeryproject.org/en/stable/
+
+  -> Message brokers
+    * Redis (in memory data store or cache)
+    * RabbitMQ(real, enterprise-grade broker)
+  -> we will use redis both as a message broker + cache
+
+-> use redis on docker ...
+docker run -d -p 6379:6379 redis
+pipenv install redis
+pipenv install celery
+
+celery -A storefront worker --loglevel=info
+
+=> for periodic tasks we use Celery Beat(Task Scheduler)
+-> start it like this
+celery -A storefront beat
+
+=> To monitor celery tasks we use Flower
+pipenv install flower
+celery -A storefront flower
+http://localhost:5555/
 
 
