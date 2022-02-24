@@ -161,3 +161,25 @@ pipenv install django-cors-headers
 
 ==> the django-cors-headers sends "Access-Control-Allow-Origion: http//localhost:8001"
   -> this is sent to the browser so that it allows the upload
+
+
+=> Sending Emails
+
+-> to send emails we need SMTP (Simple Mail Transfer Protocol)
+-> we need a fake SMTP server for dev
+  like smtp4dev
+
+-> Django Email Backends
+  * SMTP (default)
+  * Console
+  * File
+  * Locmem
+  * Dummy
+
+=> sending templated Emails:
+  django-templated-mail
+
+pipenv install django-templated-mail
+
+
+
