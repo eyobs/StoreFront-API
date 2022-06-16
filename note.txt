@@ -251,4 +251,36 @@ pipenv install --dev model_bakery
   
 -> Exercise
   * write all the tests for the collections endpoint and the products endpoint
-  
+
+
+
+=> Performance Testing
+  -> Locust (locust.io)
+~
+locust -f locustfiles/browse_products.py
+
+-> core usecases
+  Browse products
+  Register, sign in, sign out
+
+-> python manage.py runserver
+locust -f locustfiles/browse_products.py
+  http://localhost:8000
+
+=> OPTIMIZATIONS 
+optimize the python code
+re-write the query
+tune the database
+cache the result
+
+=> optimize the critical parts that matter the most
+
+-> most of the time the issue lies on the query or the DB
+=> Profiling with Silk (django-silk): profiling tool
+
+pipenv install --dev django-silk
+python manage.py migrate
+
+localhost:8000/silk/
+
+=> Stress Testing..

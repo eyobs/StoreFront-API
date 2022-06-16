@@ -1,0 +1,32 @@
+===> having issues with postgres?
+" Failed to start PostgreSQL database server."
+https://suay.site/?p=1130
+=> sudo systemctl status postgresql
+
+sudo systemctl stop postgresql.service
+systemctl status postgresql.service
+sudo pacman -S postgresql postgresql-libs postgresql-old-upgrade
+
+->An old version of the database format was found.
+->See https://wiki.archlinux.org/index.php/PostgreSQL#Upgrading_PostgreSQL
+
+=> Move the old data and initialize the database: 
+sudo mv /var/lib/postgres/data /var/lib/postgres/olddata
+sudo mkdir /var/lib/postgres/data /var/lib/postgres/tmp
+sudo chown postgres:postgres /var/lib/postgres/data /var/lib/postgres/tmp
+cd /var/lib/postgres/tmp
+sudo -u postgres initdb -D /var/lib/postgres/data
+
+=> The following command will transfer data from the old cluster to the new one, in this
+ command you need to replace PG_VERSION with the version of the previous database: 
+
+sudo -u postgres pg_upgrade -b /opt/pgsql-PG_VERSION/bin -B /usr/bin -d /var/lib/postgres/olddata -D /var/lib/postgres/data
+postgres --version
+postgres (PostgreSQL) 14.2
+previous was 13
+
+sudo -u postgres pg_upgrade -b /opt/pgsql-13/bin -B /usr/bin -d /var/lib/postgres/olddata -D /var/lib/postgres/data
+
+=> After that, start the service again and check its status:	
+sudo systemctl start postgresql.service
+systemctl status postgresql.service
