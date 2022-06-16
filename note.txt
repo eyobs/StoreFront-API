@@ -284,3 +284,26 @@ python manage.py migrate
 localhost:8000/silk/
 
 => Stress Testing..
+
+==> Caching
+cache Backends
+  -> Local memory(default)
+  -> Memcached
+  -> Redis
+  -> Database
+  -> File system
+
+-> get redis on a docker container
+docker run -d -p 6379:6379 redis
+
+-> Configuring Caching
+pipenv install django-redis
+
+-> @cache_page()
+
+docker exec -it becd redis-cli
+> select 2
+> keys *
+> flushall
+
+
