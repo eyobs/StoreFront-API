@@ -306,4 +306,28 @@ docker exec -it becd redis-cli
 > keys *
 > flushall
 
+==> Preparing for production
+python manage.py collectstatic
+  -> always make sure to include the name of apps in Installed apps before 
+     running collectstatic so that there static content is included
+
+-> django doesn't support serving static files in production
+  (to add this feature to django we have to install a library called whitenoise)
+pipenv install whitenoise
+
+-> logging for diagnogstics
+Serverity
+  DEGUG
+  INFO
+  WARNING
+  ERROR
+  CRITICAL
+
+DJANGO_SETTINGS_MODULE
+
+-> Serving the Application with Gunicorn
+pipenv install gunicorn
+gunicorn storefront.wsgi
+
+
 
